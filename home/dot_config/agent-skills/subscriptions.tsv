@@ -1,0 +1,13 @@
+# 丸ごと購読するスキルリポジトリ一覧（TSV: TAB 区切り）
+#
+# カラム:
+#   1. source          GitHub repo (owner/repo) または tree URL
+#   2. ref             固定する tag / commit SHA（最新追従は "-"）
+#   3. skill_selector  原則 "*"（全スキル購読）
+#   4. notes           補足メモ
+#
+# 注意:
+#   Kotomiya07/skills には plugins/ と .claude-plugin/marketplace.json が併存しているため、
+#   skills/ 配下のみを指すサブパス URL を指定して plugins/ 側の旧スキル混入を防いでいる。
+
+https://github.com/Kotomiya07/skills/tree/main/skills	-	*	自作スキル19件（6ドメイン: dev/docs/ops/research/web/writing）

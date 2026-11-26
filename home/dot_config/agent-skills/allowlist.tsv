@@ -1,0 +1,46 @@
+# 第三者スキルの個別購読 allowlist（TSV: TAB 区切り）
+#
+# カラム:
+#   1. skill_name   インストールするスキル名（出所の名前のまま。改名しない）
+#   2. source_repo  出所リポジトリ（owner/repo または URL）
+#   3. ref          固定する tag / commit SHA（最新追従は "-"）
+#   4. notes        導入目的・補足
+#
+# --- 出所 repo 確認済み（DESIGN.md §3.3 / CLASSIFICATION 相当） ---
+
+find-skills	vercel-labs/skills	-	skills CLI 公式のスキル検索
+agmsg	fujibee/agmsg	-	クロスエージェント連絡用（最新版で全台統一・確定）
+notebooklm	teng-lin/notebooklm-py	-	NotebookLM 連携
+design-taste-frontend	Leonxlnx/taste-skill	-	フロントエンドデザイン指針
+herdr	ogulcancelik/herdr	-	herdr 公式スキル
+hallmark	nutlope/hallmark	-	コミュニティ配布物
+wandb-primary	wandb/skills	-	Weights & Biases 基本スキル
+wandb-autoresearch	wandb/skills	-	Weights & Biases 自動研究スキル
+kill-ai-slop	yetone/kill-ai-slop	-	AI スロップ除去
+grill-me	mattpocock/skills	-	設計インタビュー
+grill-with-docs	mattpocock/skills	-	ドキュメント併用インタビュー
+grilling	mattpocock/skills	-	インタビュー系
+domain-modeling	mattpocock/skills	-	ドメインモデリング
+html	mathbullet/skills	-	HTML 生成
+imozuru	MaryCache/imozuru	-	一次情報収集（2版差分確認後に統一）
+literature-review	davila7/claude-code-templates	-	文献レビュー（第三者購読で決定済み）
+
+# --- 以下は出所 repo または購読要否が未確定のため保留（未決事項 #3） ---
+# 確認でき次第、正確な owner/repo を補完してコメントアウトを外すこと。
+#
+# unslop	<TODO:owner/repo>	-	stellargent_lab のスキル
+# retro	<TODO:owner/repo>	-	mattpocock 系
+# pstack-correct	<TODO:owner/repo>	-	pstack 系
+# agent-browser	<TODO:owner/repo>	-	agent-browser 付属
+# playwright	<TODO:owner/repo>	-	Microsoft
+# playwright-interactive	<TODO:owner/repo>	-	Microsoft
+# shadcn	<TODO:owner/repo>	-	shadcn
+# hatch-pet	<TODO:owner/repo>	-	Codex 向け配布物
+# ui-skills	<TODO:owner/repo>	-	コミュニティ配布物
+# treg	<TODO:owner/repo>	-	製品付属（データ API）
+# make-ugc	<TODO:owner/repo>	-	treg 系の製品付属
+# lead-signals	<TODO:owner/repo>	-	配布物
+# recruit	<TODO:owner/repo>	-	配布物
+# web-access	<TODO:owner/repo>	-	配布物
+# web-search	<TODO:owner/repo>	-	配布物
+# arxiv	<TODO:owner/repo>	-	配布物

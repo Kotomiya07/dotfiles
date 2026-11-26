@@ -1,0 +1,14 @@
+# 廃止・残骸スキルの prune リスト（1行1スキル名）
+#
+# - 空行と # コメントは無視される
+# - "/" や ".." やワイルドカードを含む行は安全ガードによりスキップされる
+# - allowlist.tsv にも有効登録されている名前は矛盾防止のためスキップされる
+
+yomiyasu
+codex-review
+slide-master
+huashu-design
+oracle
+writing-quotation
+report-skills
+consulting-pptx-skill.bak-20261122

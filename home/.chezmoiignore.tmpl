@@ -1,0 +1,11 @@
+{{- /*
+  方針 A-3: 初回はスキル配布のみとし、CLAUDE.md / AGENTS.md / GEMINI.md 等の
+  エージェント指示ファイルは管理対象にしない（manage_claude_md = false）。
+  将来テンプレートを追加した際にも誤配置されないよう安全ガードを保持する。
+*/ -}}
+{{- $knownHosts := list "gpu-01" "gpu-02" "gpu-03" "muse-vm" "mac-mini" "macbook" -}}
+{{- if or (not .manage_claude_md) (not (has .host_profile $knownHosts)) }}
+.claude/CLAUDE.md
+.codex/AGENTS.md
+.gemini/GEMINI.md
+{{- end }}

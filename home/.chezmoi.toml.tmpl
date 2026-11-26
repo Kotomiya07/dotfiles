@@ -1,0 +1,50 @@
+{{- /* ホスト名から既定の host_profile を推定（macOS の .local 等を正規化） */ -}}
+{{- $rawHost := lower (trimSuffix ".local" .chezmoi.hostname) -}}
+{{- $defaultProfile := "unknown" -}}
+{{- if hasPrefix "gpu-01" $rawHost -}}
+{{-   $defaultProfile = "gpu-01" -}}
+{{- else if hasPrefix "gpu-02" $rawHost -}}
+{{-   $defaultProfile = "gpu-02" -}}
+{{- else if hasPrefix "gpu-03" $rawHost -}}
+{{-   $defaultProfile = "gpu-03" -}}
+{{- else if contains "muse" $rawHost -}}
+{{-   $defaultProfile = "muse-vm" -}}
+{{- else if or (contains "mac-mini" $rawHost) (contains "macmini" $rawHost) -}}
+{{-   $defaultProfile = "mac-mini" -}}
+{{- else if contains "macbook" $rawHost -}}
+{{-   $defaultProfile = "macbook" -}}
+{{- end -}}
+
+{{- $hostProfile := promptStringOnce . "host_profile" "Host profile (gpu-01|gpu-02|gpu-03|muse-vm|mac-mini|macbook|unknown)" $defaultProfile -}}
+
+{{- $defaultMuseCustom := eq $hostProfile "muse-vm" -}}
+{{- $enableMuseCustom := promptBoolOnce . "skills.enable_muse_custom_skills" "Enable ~/workspace/custom-skills symlinks (Muse VM)" $defaultMuseCustom -}}
+
+{{- $defaultNodeBinDir := "" -}}
+{{- if eq $hostProfile "gpu-02" -}}
+{{-   $defaultNodeBinDir = joinPath .chezmoi.homeDir ".local" "node24" "bin" -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{-   $defaultNodeBinDir = "/opt/homebrew/bin" -}}
+{{- end -}}
+{{- $nodeBinDir := promptStringOnce . "skills.node_bin_dir" "Optional Node.js (>=22.20) bin dir (empty for auto)" $defaultNodeBinDir -}}
+
+{{- $reconcileEnabled := promptBoolOnce . "skills.reconcile_enabled" "Enable skills reconcile on chezmoi apply" true -}}
+{{- /* 方針 A-3: 初回はスキル配布のみ。CLAUDE.md / AGENTS.md 等は管理対象外で固定する */ -}}
+
+[data]
+  host_profile = {{ $hostProfile | quote }}
+  manage_claude_md = false
+
+[data.skills]
+  reconcile_enabled = {{ $reconcileEnabled }}
+  throttle_seconds = 86400
+  pool_dir = {{ joinPath .chezmoi.homeDir ".agents" "skills" | quote }}
+  claude_skills_dir = {{ joinPath .chezmoi.homeDir ".claude" "skills" | quote }}
+  codex_skills_dir = {{ joinPath .chezmoi.homeDir ".codex" "skills" | quote }}
+  enable_muse_custom_skills = {{ $enableMuseCustom }}
+  muse_custom_skills_dir = {{ joinPath .chezmoi.homeDir "workspace" "custom-skills" | quote }}
+  manage_claude_symlinks = true
+  adopt_existing_dirs = false
+  prune_backup = true
+  node_bin_dir = {{ $nodeBinDir | quote }}
+  skills_cli_package = "skills"
